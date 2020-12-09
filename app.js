@@ -14,7 +14,7 @@ mongoose.connect(process.env.DB_CONNECT, { useUnifiedTopology: true, useNewUrlPa
 //middleware
 app.use(express.json())
 
-app.use('/register/user', authRoute);
+app.use('/user', authRoute);
 
 
 
