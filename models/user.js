@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
         max: 255,
         min: 8
     },
-    date: {
+    dateCreated: {
         type: Date,
         default: Date.now
     }

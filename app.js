@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const authRoute = require("./routes/auth");
 
 dotenv.config();
-
+const port = 8080;
 //connect to database
 mongoose.connect(process.env.DB_CONNECT, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true },
 () => {console.log('database connected')}
@@ -13,10 +13,11 @@ mongoose.connect(process.env.DB_CONNECT, { useUnifiedTopology: true, useNewUrlPa
 
 //middleware
 app.use(express.json())
+// app.use('/', (req,res)=>{res.send('Welcome to the questions forum')})
 
 app.use('/user', authRoute);
 
 
 
-app.listen(8090, ()=>{console.log("server is running")})
+app.listen(port, ()=>{console.log(`server is running on http://localhost:${port}`)})
 
