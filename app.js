@@ -3,6 +3,7 @@ const app = express();
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoute = require("./routes/auth");
+const articleRoute = require('./routes/articles');
 
 dotenv.config();
 const port = 8080;
@@ -16,6 +17,7 @@ app.use(express.json())
 // app.use('/', (req,res)=>{res.send('Welcome to the questions forum')})
 
 app.use('/user', authRoute);
+app.use('/user/articles', articleRoute);
 
 
 

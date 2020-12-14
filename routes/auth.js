@@ -39,11 +39,11 @@ router.post('/login', async (req,res) => {
     const { error } = loginValidation(req.body);
     if(error) return res.status(400).send(error.details[0].message);
 
-    const existingUser = await User.findOne({email: req.body.email})
-    if(!existingUser) return res.status(400).json({msg:"Email or password is wrong"});
+    const user = await User.findOne({email: req.body.email})
+    if(!user) return res.status(400).json({msg:"Email or password is wrong"});
        
     //check if password is correct
-    const validPassword = await bcrypt.compare(req.body.password, existingUser.password)
+    const validPassword = await bcrypt.compare(req.body.password, user.password)
     if(!validPassword){
         return res.status(400).json({msg: "Password is wrong"});
             
@@ -52,8 +52,8 @@ router.post('/login', async (req,res) => {
     // res.send('Successfully logged in')
 
     //Assigning tokens
-    const token = jwt.sign({_id: existingUser._id}, process.env.TOKEN_SECRET)
-    res.header('auth-token', token).send(token)
+    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET)
+    res.header('auth-token', token).send(token);
 });
 
 
